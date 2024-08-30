@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu8rbxlhnnwui"]
+[gd_scene load_steps=7 format=3 uid="uid://cu8rbxlhnnwui"]
 
 [ext_resource type="PackedScene" uid="uid://des484shprodx" path="res://player.tscn" id="1_72ykg"]
 [ext_resource type="Script" path="res://main_scene.gd" id="1_71752"]
+[ext_resource type="PackedScene" uid="uid://c0d4ccrteqm78" path="res://path_testing_scene.tscn" id="3_g4gr8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_176fw"]
 size = Vector3(10, 0.005, 10)
@@ -16,10 +17,6 @@ material = SubResource("StandardMaterial3D_yhbec")
 script = ExtResource("1_71752")
 player = NodePath("Player")
 ground = NodePath("Ground")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.926843, 0.375448, 0, -0.375448, 0.926843, 0, 1.77448, 3.82842)
-current = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
@@ -65,3 +62,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 light_energy = 2.0
 omni_range = 15.0
 omni_attenuation = 1e-05
+
+[node name="Path_Testing_Scene" parent="." instance=ExtResource("3_g4gr8")]

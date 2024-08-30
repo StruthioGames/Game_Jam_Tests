@@ -5,12 +5,14 @@ var timer = 0.0
 var rewinding = false
 var history = RingBuffer.new(300)
 
-@export var player = CharacterBody3D
-@export var ground = StaticBody3D
+@export var player: CharacterBody3D
+@export var ground: StaticBody3D
+@export var pathing: PackedScene
 
 var objects_to_track = []
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	objects_to_track.append(player)
 
 func _process(delta):
@@ -31,6 +33,8 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("rewind") and not rewinding:
 		rewinding = true
+	elif event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
 
 func capture_state():
 	var state = {}
