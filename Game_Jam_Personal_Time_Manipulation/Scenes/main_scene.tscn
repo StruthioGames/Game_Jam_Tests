@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://cu8rbxlhnnwui"]
+
+[ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_71752"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="2_5c5lo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_176fw"]
+size = Vector3(10, 0.005, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhbec"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xixwl"]
+material = SubResource("StandardMaterial3D_yhbec")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hko6l"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_t1221"]
+sky_material = SubResource("ProceduralSkyMaterial_hko6l")
+
+[sub_resource type="Environment" id="Environment_nckfw"]
+background_mode = 2
+sky = SubResource("Sky_t1221")
+tonemap_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mbhxd"]
+
+[node name="Main_scene" type="Node3D" node_paths=PackedStringArray("player", "camera", "ground")]
+script = ExtResource("1_71752")
+player = NodePath("Player")
+camera = NodePath("Player/Head/PlayerCamera")
+ground = NodePath("Ground")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_176fw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(10, 0, 0, 0, 0.01, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_xixwl")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Env" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_nckfw")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_5c5lo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_mbhxd")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Player/Head"]
+current = true

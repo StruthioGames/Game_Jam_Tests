@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkmvplcpdrjb0"]
+
+[ext_resource type="Script" path="res://Scripts/dungeon_pathing.gd" id="1_y1tee"]
+[ext_resource type="PackedScene" uid="uid://nbkppsolo1f5" path="res://Scenes/path_testing_block.tscn" id="2_dipdh"]
+
+[node name="Dungeon_Pathing" type="Node"]
+script = ExtResource("1_y1tee")
+path_tester_block = ExtResource("2_dipdh")

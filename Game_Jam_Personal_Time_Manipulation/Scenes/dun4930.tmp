@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=3 uid="uid://bef50i6htpopo"]
+
+[ext_resource type="Script" path="res://Scripts/dungeon_middle_1.gd" id="1_ipe7v"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_lcfbk"]
+[ext_resource type="PackedScene" uid="uid://bbsd6ydqisyou" path="res://Scenes/zombie.tscn" id="2_7284b"]
+[ext_resource type="PackedScene" uid="uid://bsakhqutytkm6" path="res://Scenes/steampunk_rifle.tscn" id="4_jv614"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4gmcj"]
+size = Vector3(10, 0.05, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vewou"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p4rbw"]
+size = Vector3(10, 0.05, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_reaac"]
+size = Vector3(10, 0.05, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ehtva"]
+size = Vector3(10, 0.05, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2o7oq"]
+size = Vector3(20, 0.05, 10)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_gx2hn"]
+vertices = PackedVector3Array(-14.5, 0.45, -4.5, -14.5, 0.45, 4.5, 14.5, 0.45, 4.5, 14.5, 0.45, -4.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xcj2k"]
+size = Vector3(30, 0.05, 10)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8s27w"]
+
+[node name="Dungeon_Middle_1" type="Node3D"]
+script = ExtResource("1_ipe7v")
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="Left Wall" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Left Wall"]
+shape = SubResource("BoxShape3D_4gmcj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Left Wall"]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_vewou")
+
+[node name="Right Wall" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 15, 5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Right Wall"]
+shape = SubResource("BoxShape3D_p4rbw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Right Wall"]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_vewou")
+
+[node name="Back Wall" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 5, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Back Wall"]
+shape = SubResource("BoxShape3D_reaac")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Back Wall"]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("BoxMesh_vewou")
+
+[node name="Front Wall" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 5, 5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Front Wall"]
+shape = SubResource("BoxShape3D_ehtva")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Front Wall"]
+transform = Transform3D(10, 0, 6.77626e-21, 0, 0.1, 0, -3.38813e-21, 0, 20, 0, 0, 0)
+mesh = SubResource("BoxMesh_vewou")
+
+[node name="Ceiling" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0259399)
+shape = SubResource("BoxShape3D_2o7oq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Ceiling"]
+transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_vewou")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="Left Wall Light" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 5, 0)
+light_color = Color(1, 0.527, 0.34, 1)
+omni_range = 100.0
+
+[node name="Right Wall Light" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 5, 0)
+light_color = Color(1, 0.527, 0.34, 1)
+omni_range = 100.0
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_gx2hn")
+
+[node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor"]
+shape = SubResource("BoxShape3D_xcj2k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor"]
+transform = Transform3D(30, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_vewou")
+
+[node name="zombie" parent="NavigationRegion3D" instance=ExtResource("2_7284b")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 0, 0)
+player_path = NodePath("../../Player")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, 0)
+script = ExtResource("1_lcfbk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_8s27w")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Player/Head"]
+current = true
+
+[node name="Steampunk Rifle" parent="Player/Head/PlayerCamera" instance=ExtResource("4_jv614")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239433, -0.241102, -0.692995)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = -94.0
+offset_top = -85.0
+offset_right = 1330.0
+offset_bottom = 763.0
+color = Color(1, 0, 0, 0.156863)
+
+[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
