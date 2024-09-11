@@ -1,8 +1,0 @@
-ea4bc82a6ad023ab7ee23ee620429895
-::res://::1725032562
-icon.svg::CompressedTexture2D::1657807280869665780::1725032215::1725032563::1::::<><>::
-main_scene.gd::GDScript::-1::1725032215::0::1::::<>Node3D<>::
-main_scene.tscn::PackedScene::6245777906067616480::1725032215::0::1::::<><>::uid://des484shprodx::::res://player.tscn<>res://main_scene.gd
-player.gd::GDScript::-1::1725032215::0::1::::<>CharacterBody3D<>::
-player.tscn::PackedScene::7478997500516008845::1725032215::0::1::::<><>::res://player.gd
-RingBuffer.gd::GDScript::-1::1725032215::0::1::::RingBuffer<>RefCounted<>::
