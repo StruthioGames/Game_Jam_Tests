@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxealu1u04vqh"]
+
+[ext_resource type="PackedScene" uid="uid://baxa7ock267ad" path="res://Scenes/paladin_with_animation.tscn" id="1_s0klr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ioe60"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7nmk6"]
+
+[sub_resource type="Environment" id="Environment_yt80p"]
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_ioe60")
+skeleton = NodePath("StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_7nmk6")
+
+[node name="PaladinWithAnimation" parent="." instance=ExtResource("1_s0klr")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yt80p")
