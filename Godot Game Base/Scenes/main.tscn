@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1t7vwr3epklo"]
+
+[ext_resource type="PackedScene" uid="uid://cf1pwgl0y0mi6" path="res://Scenes/Player.tscn" id="1_ovbo8"]
+
+[sub_resource type="Environment" id="Environment_186aj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp03y"]
+albedo_color = Color(0.278431, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rcodn"]
+material = SubResource("StandardMaterial3D_dp03y")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lu1tt"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ovbo8")]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_186aj")
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Stage"]
+transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("BoxMesh_rcodn")
+skeleton = NodePath("StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stage/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_lu1tt")
